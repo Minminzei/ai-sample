@@ -1,0 +1,8 @@
+__pycache__
+*.log
+.DS_Store
+!.keep
+*.fsa
+
+resources/*/*/*
+!resources/*/*/.keep
