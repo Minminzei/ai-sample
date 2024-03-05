@@ -1,0 +1,3 @@
+-r requirements.txt
+nvidia-ml-py>=11.525,<300
+pynvx==1.0.0 ; sys_platform == "darwin"
