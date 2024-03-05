@@ -1,6 +1,6 @@
-# AI FACE
+# Face Swapサンプル
 
-仕組みについては[こちらを参照](https://github.com/Minminzei/ai-sample/issues/1)
+FaceSwapの仕組みについては[こちらを参照](https://github.com/Minminzei/ai-sample/issues/1)
 
 ## 環境構築
 ### 1. dockerコンテナビルド
