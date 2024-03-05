@@ -1,5 +1,4 @@
 #!/usr/bin python3
-""" Main entry point to the training process of FaceSwap """
 from __future__ import annotations
 import logging
 import os
@@ -32,20 +31,6 @@ logger = logging.getLogger(__name__)
 
 
 class Train():  # pylint:disable=too-few-public-methods
-    """ The Faceswap Training Process.
-
-    The training process is responsible for training a model on a set of source faces and a set of
-    destination faces.
-
-    The training process is self contained and should not be referenced by any other scripts, so it
-    contains no public properties.
-
-    Parameters
-    ----------
-    arguments: argparse.Namespace
-        The arguments to be passed to the training process as generated from Faceswap's command
-        line arguments
-    """
     def __init__(self, arguments: argparse.Namespace) -> None:
         logger.debug("Initializing %s: (args: %s", self.__class__.__name__, arguments)
         self._args = arguments

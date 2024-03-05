@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-""" The master faceswap.py script """
 import gettext
 import locale
 import os
@@ -23,21 +22,11 @@ _PARSER = cli_args.FullHelpArgumentParser()
 
 
 def _bad_args(*args) -> None:  # pylint:disable=unused-argument
-    """ Print help to console when bad arguments are provided. """
     print(cli_args)
     _PARSER.print_help()
     sys.exit(0)
 
-
 def _main() -> None:
-    """ The main entry point into Faceswap.
-
-    - Generates the config files, if they don't pre-exist.
-    - Compiles the :class:`~lib.cli.args.FullHelpArgumentParser` objects for each section of
-      Faceswap.
-    - Sets the default values and launches the relevant script.
-    - Outputs help if invalid parameters are provided.
-    """
     generate_configs()
 
     subparser = _PARSER.add_subparsers()
