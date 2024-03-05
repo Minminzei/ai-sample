@@ -17,7 +17,7 @@ ln -s $(which python3) /usr/local/bin/python
 
 echo "install package"
 pip install --upgrade pip
-pip install --no-cache-dir -r requirements_nvidia.txt
+pip install --no-cache-dir -r requirements/nvidia.txt
 
 export DEBIAN_FRONTEND=noninteractive
 export FACESWAP_BACKEND=nvidia
