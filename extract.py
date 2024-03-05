@@ -5,12 +5,13 @@ from argparse  import ArgumentParser
 import subprocess
 
 parser = ArgumentParser()
+resource_path = os.getenv("RESOURCE_PATH")
 
 configfile = 'config/extract.ini'
 
 def extract(person_name: str) -> None:
-    input = f"resources/images/{person_name}"
-    output = f"resources/extracts/{person_name}"
+    input = f"{resource_path}/images/{person_name}"
+    output = f"{resource_path}/extracts/{person_name}"
     # 学習で使用するモデルで規定されたサイズを指定する
     # Ex. Lightweight: 64px, Realface: 64-128px
     size = 512
@@ -29,7 +30,7 @@ def extract(person_name: str) -> None:
     print("complete extract")
 
 def sort_by_face(person_name: str) -> None:
-    input = f"resources/extracts/{person_name}"
+    input = f"{resource_path}/extracts/{person_name}"
     sort_by = "face"
     threshold = "0.5"
     group_by = "face"
@@ -45,14 +46,14 @@ def sort_by_face(person_name: str) -> None:
     print("complete sorting")
 
 def clean_up(person_name: str) -> None:
-    faces = f"resources/extracts/{person_name}"
+    faces = f"{resource_path}/extracts/{person_name}"
     # 生成されたフォルダを削除して、画像を1階層あげる
     for file in glob.glob(f"{faces}/*"):
         if os.path.isdir(file):
             for image in glob.glob(f"{file}/*.png"):
                 os.rename(image, f"{faces}/{os.path.basename(image)}")
             shutil.rmtree(file, ignore_errors=True)
-    alignments = f"resources/images/{person_name}/alignments.fsa"
+    alignments = f"{resource_path}/images/{person_name}/alignments.fsa"
     job = "remove-faces"
     output = "file"
     result = subprocess.run([

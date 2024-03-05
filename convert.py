@@ -1,15 +1,17 @@
+import os
 from argparse  import ArgumentParser
 import subprocess
 
 parser = ArgumentParser()
+resource_path = os.getenv("RESOURCE_PATH")
 
 configfile = "config/convert.ini"
 
 def convert() -> None:
-    input = "resources/images/convert"
-    output = "resources/converts/images"
-    model = "resources/trains/model"
-    alignments = "resources/images/convert/alignments.fsa"
+    input = f"{resource_path}/images/convert"
+    output = f"{resource_path}/converts/images"
+    model = f"{resource_path}/trains/model"
+    alignments = f"{resource_path}/images/convert/alignments.fsa"
     result = subprocess.run([
         "python", "lib/faceswap.py", "convert", 
         "--input-dir", input, "--output-dir", output, 

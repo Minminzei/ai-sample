@@ -1,14 +1,16 @@
+import os
 from argparse  import ArgumentParser
 import subprocess
 
 parser = ArgumentParser()
+resource_path = os.getenv("RESOURCE_PATH")
 
 configfile = "config/train.ini"
 
 def train(trainer:str) -> None:
-    input_a = "resources/extracts/input_a"
-    input_b = "resources/extracts/input_b"
-    output = "resources/trains"
+    input_a = f"{resource_path}/extracts/input_a"
+    input_b = f"{resource_path}/extracts/input_b"
+    output = f"{resource_path}/trains"
     model_dir = f"{output}/model"
     result = subprocess.run([
         "python", "lib/faceswap.py", "train", 

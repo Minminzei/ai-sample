@@ -2,6 +2,7 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV FACESWAP_BACKEND cpu
+ENV RESOURCE_PATH resources
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 

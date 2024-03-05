@@ -5,11 +5,12 @@ import matplotlib.pyplot as plt
 import imageio
 
 parser = ArgumentParser()
+resource_path = os.getenv("RESOURCE_PATH")
 
 def video_to_images(person_name:str, fps:int) -> None:
     try:
-        original = f'resources/originals/{person_name}'
-        output = f'resources/images/{person_name}'
+        original = f'{resource_path}/originals/{person_name}'
+        output = f'{resource_path}/images/{person_name}'
         counter = 0
 
         for file in glob.glob(f'{output}/*.png'):
@@ -27,8 +28,8 @@ def video_to_images(person_name:str, fps:int) -> None:
 
 def images_to_video(fps:int) -> None:
     try:
-        writer = imageio.get_writer('resources/converts/video/%Y%m%d%H%M%S.mp4', fps=fps)
-        for file in glob.glob('resources/converts/swapped_images/*.png'):
+        writer = imageio.get_writer(f'{resource_path}/converts/video/%Y%m%d%H%M%S.mp4', fps=fps)
+        for file in glob.glob(f'{resource_path}/converts/swapped_images/*.png'):
             im = imageio.v2.imread(file),
             writer.append_data(im)
         writer.close()
