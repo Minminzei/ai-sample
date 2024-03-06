@@ -7,7 +7,7 @@ import imageio
 parser = ArgumentParser()
 resource_path = os.getenv("RESOURCE_PATH")
 
-def video_to_images(person_name:str, fps:int) -> None:
+def video_to_images(person_name:str, fps:str) -> None:
     try:
         original = f'{resource_path}/originals/{person_name}'
         output = f'{resource_path}/images/{person_name}'
@@ -17,7 +17,7 @@ def video_to_images(person_name:str, fps:int) -> None:
             os.remove(file)
 
         for input_path in glob.glob(f'{original}/*.mp4'):
-            video = imageio.get_reader(input_path, 'ffmpeg', fps=fps)
+            video = imageio.get_reader(input_path, 'ffmpeg', fps=int(fps))
             for _, image in enumerate(video.iter_data()):
                 plt.imsave(f'{output}/{counter:06}.png',image)
                 counter += 1
@@ -26,13 +26,18 @@ def video_to_images(person_name:str, fps:int) -> None:
         print("Error running ffmpeg")
         print(e)
 
-def images_to_video(fps:int) -> None:
+def images_to_video(fps:str) -> None:
     try:
-        writer = imageio.get_writer(f'{resource_path}/converts/video/%Y%m%d%H%M%S.mp4', fps=fps)
-        for file in glob.glob(f'{resource_path}/converts/swapped_images/*.png'):
-            im = imageio.v2.imread(file),
+        output = f'{resource_path}/converts/video'
+        for file in glob.glob(f'{output}/*.mp4'):
+            os.remove(file)
+
+        writer = imageio.get_writer(f'{output}/output.mp4', fps=int(fps))
+        for file in sorted(glob.glob(f'{resource_path}/converts/swapped_images/*.png')):
+            im = imageio.v2.imread(file)
             writer.append_data(im)
         writer.close()
+        print(f"Saved video to {resource_path}/converts/video")
     except Exception as e:
         print("Error running ffmpeg")
         print(e)
@@ -47,7 +52,7 @@ def _main():
     parser.add_argument('-f', '--fps',
                         type=str,
                         help='フレームレート',
-                        default=25)
+                        default="25")
     
     args = parser.parse_args()
     if args.function_name == "video_to_images":

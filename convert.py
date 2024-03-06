@@ -9,7 +9,7 @@ configfile = "config/convert.ini"
 
 def convert() -> None:
     input = f"{resource_path}/images/convert"
-    output = f"{resource_path}/converts/images"
+    output = f"{resource_path}/converts/swapped_images"
     model = f"{resource_path}/trains/model"
     alignments = f"{resource_path}/images/convert/alignments.fsa"
     result = subprocess.run([
