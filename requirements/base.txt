@@ -11,5 +11,3 @@ fastcluster
 imageio
 imageio-ffmpeg
 ffmpy
-tensorflow-macos
-tensorflow-metal

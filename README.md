@@ -1,7 +1,5 @@
 # Face Swapサンプル
 
-FaceSwapの仕組みについては[こちらを参照](https://github.com/Minminzei/ai-sample/issues/1)
-
 ## 環境構築
 ### 1. dockerコンテナビルド
 ```
@@ -58,4 +56,19 @@ python convert.py convert
 4. 画像から動画を復元する
 ```
 python files.py images_to_video -f {FPS}
+```
+
+## 備考：GPUサーバーでのセットアップ
+```
+# codeを取得
+git clone git@github.com:Minminzei/faceswap-sample.git
+cd faceswap-sample
+
+# setupを実行
+sh .bin/setup.sh
+
+# 環境変数を出力
+export DEBIAN_FRONTEND=noninteractive
+export FACESWAP_BACKEND=nvidia
+export RESOURCE_PATH=resources
 ```
